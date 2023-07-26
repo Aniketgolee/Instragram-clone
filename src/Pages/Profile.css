@@ -1,0 +1,154 @@
+.profile-image{
+    width: 120px;
+    height: 100px;
+    border-radius: 50%;
+}
+.count-section{
+    border-right:3px solid #c3c3c3;
+    padding-right: 20px;
+}
+.postaddpad{
+    padding-right: 50px;
+}
+.folloaddpad{
+    padding-left: 50px;
+}
+.followeradd{
+    padding-left: 50px;
+}
+.container{
+    width: 76vw !important;
+}
+.custom-btn{
+    padding: 0.6rem;
+    border-radius: 4px;
+}
+
+.custom-btn-pink{
+    border: 2px solid  #f43756;
+    background-color: #f43756;
+    color: #fff;
+    padding: 14px;
+    width: 160px;
+}
+.paddBox{
+    margin-bottom: 10px;
+}
+.clearfix{
+    clear:both;
+}
+.instacard{
+    width: 360px;
+    height: 248px;
+}
+.instacard-header{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    padding: 16px;
+    margin: 0;
+    vertical-align: middle;
+}
+/* .instacard-profile-image{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    float: left;
+} */
+.instacard-profile-name{
+    float: left;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #262626;
+    margin-left: 1rem;
+}
+.instacard-actions{
+    float: right;
+    margin-top: -1rem;
+    font-weight: bold;
+}
+/* .instacard-image{
+    width: 100%;
+} */
+.instacard-like-icon, 
+.instacard-comment-icon,
+.instacard-save-icon,
+.instacard-share-icon{
+    padding:8px;
+    float: left;
+}
+
+/* .instacard-likes{
+    padding: 0 16px;
+    margin: 0 0 8px 0;
+    font-weight: bold;
+} */
+.instacard-comment-profile{
+    font-weight: 600;
+    margin-left: 10px;
+}
+.instacard-commenti-like-icon{
+    margin-right: 29px;
+}
+
+.upload-box{
+    height:400px ;
+    width: 360px;
+    border: 4px dotted gray;
+    border-radius: 10px;
+    position: relative;
+}
+.dropZoneOverlay, .FileUpload{
+    width: 283px;
+    height: 71px;
+}
+.dropZoneOverlay{
+   
+    font-family: cursive;
+    color: #7066fb;
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    text-align: center;
+}
+.FileUpload{
+    opacity: 0;
+    position:relative;
+    z-index: 1;
+}
+@media only screen and (max-width:450px){
+    .container{
+        width: 100vw !important;
+    }
+   .imageBox{
+    margin-top: 20px;
+   }
+   .count-section{
+    border-right:3px solid #c3c3c3;
+    padding-right: none;
+}
+.postaddpad{
+    padding-right: 30px;
+}
+.folloaddpad{
+    padding-left: 30px;
+}
+.followeradd{
+    padding-left: 30px;
+}
+.paddBox{
+    margin-bottom: 0px;
+}
+.card{
+    margin-bottom: 10px;
+}
+.upload-box{
+    height:380px ;
+    width: 320px;
+    border: 4px dotted gray;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 10px;
+}
+  
+}

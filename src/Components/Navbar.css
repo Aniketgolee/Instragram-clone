@@ -1,0 +1,22 @@
+.navbar{
+    height: 66px  !important;
+}
+.searchbox{
+    width: 30vw;
+    padding: 10px;
+    margin-left: 3px;
+}
+
+.iconadjust{
+    margin-left: 40px;
+}
+@media only screen and (max-width:450px) {
+    .iconadjust{
+        margin-left: 10px;
+    }
+    .navBox{
+        margin-top: 10px;
+    }
+   
+    
+}

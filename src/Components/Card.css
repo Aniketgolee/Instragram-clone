@@ -1,0 +1,71 @@
+.clearfix{
+    clear:both;
+}
+.instacard{
+    border: 1px solid #ccc;
+    width: 500px;
+}
+.instacard-header{
+    height: 60px;
+    padding: 16px;
+    margin: 0;
+    vertical-align: middle;
+}
+.instacard-profile-image{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.instacard-profile-name{
+    float: left;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #262626;
+    margin-left: 1rem;
+}
+.instacard-actions{
+    float: right;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+.instacard-image{
+    width: 100%;
+}
+.instacard-like-icon, 
+.instacard-comment-icon,
+.instacard-save-icon,
+.instacard-share-icon{
+    padding: 8px;
+    float: left;
+}
+
+.instacard-likes{
+    padding: 0 16px;
+    margin: 0 0 8px 0;
+    font-weight: bold;
+}
+.instacard-comment-profile{
+    font-weight: 600;
+}
+
+.instacard-comment{
+    margin-bottom: 4px;
+    line-height: 18px;
+    padding: 0 ;
+}
+.instacard-commenti-like-icon{
+    float: right;
+    width: 12px;
+    height: 12px;
+    margin-right:10px ;
+}
+.boxOne{
+    margin-right: 40px;
+}
+@media only screen and (max-width:450px){
+    .instacard{
+        border: 1px solid #ccc;
+        width: 400px;
+    }
+}
