@@ -2,19 +2,81 @@ import React, { useState } from 'react';
 import '../Pages/Profile.css'
 import logo from '../Imgaes/nature.jpg';
 import Button from 'react-bootstrap/Button';
+import { API_BASE_URL } from '../config';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+import Swal from 'sweetalert2';
+import { useNavigate} from 'react-router-dom';
+
 
 const Profile = () => {
+    const [image, setImage] = useState({ preview: '', data: '' })
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const navigate = useNavigate();
 
     const [showPost, setShowPost] = useState(false);
-
+    const [caption, setCaption] = useState("");
+    const [location, setLocation] = useState("");
     const handlePostClose = () => setShowPost(false);
     const handlePostShow = () => setShowPost(true);
+    const CONFIG_OBJ = {
+        headers: {
+            "Content-Type": 'application/json',
+            "Authorization": 'Bearer' + localStorage.getItem("token")
+        }
+    }
+    const handleFileSelect = (event) => {
+        const img = {
+            preview: URL.createObjectURL(event.target.files[0]),
+            data: event.target.files[0]
+        }
+        setImage(img);
+    }
+    const handleImgUpload = async () => {
+        let formData = new FormData();
+        formData.append('file', image.data);
+
+        const response = axios.post(`${API_BASE_URL}/uploadFile`, formData)
+        return response;
+    }
+    const addPost = async () => {
+        if (image.preview === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Post image is mandatory!'
+            })
+        } else if (caption === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Post caption is mandatory !'
+            })
+        }
+        else if (location === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Location is mandatory !'
+            })
+        } else {
+            const imgRes = await handleImgUpload();
+            //add validation rule for caption and location
+            const request = { description: caption, location: location, image: `${API_BASE_URL}/${imgRes.data.fileName}` }
+            //write api call to create post
+            const postResponse = await axios.post(`${API_BASE_URL}/createpost`,request,CONFIG_OBJ);
+            if(postResponse.status ===201){
+                navigate("/posts")
+            }else{
+                Swal.fire({
+                    icon:'error',
+                    title:'Some error occurred while creating post'
+                })
+            }
+        }
+    }
+
     return (
         <div className='container shadow mt-3 p-4 '>
             <div className='row'>
@@ -200,8 +262,10 @@ const Profile = () => {
                         <div className='col-md-6 col-sm-12'>
                             <div className='upload-box'>
                                 <div className='dropZoneContainer'>
-                                    <input type='file' id="drop_zone" className='FileUpload' accept='.jpg,.png,.gif' onChange="{handleFileSelect(this)}"/>
-                                    <div className='dropZoneOverlay'><i className='fa-solid fa-cloud-arrow-up fs-1'></i><br/>Upload Photo From Computer</div>
+                                    <input name='file' type='file' id="drop_zone" className='FileUpload' accept='.jpg,.png,.gif' onChange={handleFileSelect} />
+                                    <div className='dropZoneOverlay'>
+                                        {image.preview && <img src={image.preview} width='150' height='150' />}
+                                        <i className='fa-solid fa-cloud-arrow-up fs-1'></i><br />Upload Photo From Computer</div>
                                 </div>
 
                             </div>
@@ -210,14 +274,14 @@ const Profile = () => {
                             <div className='row'>
                                 <div className='col-sm-12 mb-3'>
                                     <div className='form-floating'>
-                                        <textarea className='form-control' placeholder='Add Caption' id='floatingTextarea'></textarea>
+                                        <textarea onChange={(ev) => setCaption(ev.target.value)} className='form-control' placeholder='Add Caption' id='floatingTextarea'></textarea>
                                         <label for="floatingTextarea">Add Caption</label>
                                     </div>
 
                                 </div>
                                 <div className='col-sm-12'>
                                     <div className='form-floating mb-3'>
-                                        <input type='text' className='form-control' id='floatingInput' placeholder='Add location' />
+                                        <input type='text' onChange={(ev) => setLocation(ev.target.value)} className='form-control' id='floatingInput' placeholder='Add location' />
                                         <label for="floatingInput"><i className='fa-solid fa-location-pin pe-2'></i> Add Location</label>
 
                                     </div>
@@ -228,7 +292,7 @@ const Profile = () => {
                             <div className='row'>
                                 <div className='col-sm-12'>
 
-                                    <button className='custom-btn custom-btn-pink float-end'>
+                                    <button onClick={()=>addPost()} className='custom-btn custom-btn-pink float-end'>
                                         <span className='fs-6 fw-700'> Post</span>
                                     </button>
                                 </div>
